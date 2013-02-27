@@ -71,12 +71,17 @@ abstract class A2Base extends CComponent
 	 */
 	public function __call($method, $args)
 	{
-		$command = $this->getClient()
-			->getCommand(Inflector::getDefault()->camel($method), $args);
+		try
+		{
+			$command = $this->getClient()
+				->getCommand(Inflector::getDefault()->camel($method), $args);
 
-		if ($command)
-			return $this->getClient()->execute($command, $args);
+			if ($command)
+				return $this->getClient()->execute($command, $args);
 
+		} catch(Exception $e) {
+			// do nothing
+		}
 		return parent::__call($method, $args);
 	}
 

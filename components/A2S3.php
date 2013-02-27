@@ -75,7 +75,7 @@ class A2S3 extends A2Base
 	{
 		if(null === $this->_client)
 		{
-			$this->_client = $this->getAws()->get(self::AWS_SES);
+			$this->_client = $this->getAws()->get(self::AWS_S3);
 		}
 		return $this->_client;
 	}
