@@ -1,4 +1,4 @@
 yii-aws
 =======
 
-Amazon Web Services SDK PHP 2 Wrapper
+Amazon Web Services PHP 2 Wrapper
