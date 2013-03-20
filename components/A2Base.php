@@ -80,7 +80,8 @@ abstract class A2Base extends CComponent
 				return $this->getClient()->execute($command, $args);
 
 		} catch(Exception $e) {
-			// do nothing
+
+			throw new CException(Yii::t('zii', $e->getMessage()));
 		}
 		return parent::__call($method, $args);
 	}
