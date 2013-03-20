@@ -73,12 +73,15 @@ abstract class A2Base extends CComponent
 	{
 		try
 		{
-			$args = count($args)
+			$command_args = count($args)
 				? $args[0]
 				: $args;
 
 			$command = $this->getClient()
-				->getCommand(Inflector::getDefault()->camel($method), $args);
+				->getCommand(Inflector::getDefault()->camel($method), $command_args);
+
+			if ($command)
+				return $this->getClient()->execute($command, $command_args);
 
 		} catch(Exception $e) {
 
