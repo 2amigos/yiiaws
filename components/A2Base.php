@@ -10,8 +10,6 @@
  * @package A2.amazon.components
  */
 
-require (__DIR__ . '/../lib/aws.phar');
-
 use Aws\Common\Aws;
 use Guzzle\Inflection\Inflector;
 
