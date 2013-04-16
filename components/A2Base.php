@@ -15,28 +15,28 @@ use Guzzle\Inflection\Inflector;
 
 abstract class A2Base extends CComponent
 {
-	const AWS_AUTOSCALING 			= 'autoscaling';
-	const AWS_CLOUDFRONT 			= 'cloudfront';
-	const AWS_CLOUDWATCH 			= 'cloudwatch';
-	const AWS_DATAPIPELINE 			= 'datapipeline';
-	const AWS_DYNAMODB 				= 'dynamodb';
-	const AWS_EC2 					= 'ec2';
-	const AWS_ELASTIC_BEANSTALK 	= 'elasticbeanstalk';
+	const AWS_AUTOSCALING = 'autoscaling';
+	const AWS_CLOUDFRONT = 'cloudfront';
+	const AWS_CLOUDWATCH = 'cloudwatch';
+	const AWS_DATAPIPELINE = 'datapipeline';
+	const AWS_DYNAMODB = 'dynamodb';
+	const AWS_EC2 = 'ec2';
+	const AWS_ELASTIC_BEANSTALK = 'elasticbeanstalk';
 	const AWS_ELASTIC_LOADBALANCING = 'elasticloadbalancing';
-	const AWS_ELASTIC_TRANSCODER 	= 'elastictranscoder';
-	const AWS_GLACIER 				= 'glacier';
-	const AWS_IAM 					= 'iam';
-	const AWS_OPSWORKS 				= 'opsworks';
-	const AWS_RDS 					= 'rds';
-	const AWS_REDSHIFT 				= 'redshift';
-	const AWS_ROUTE53 				= 'route53';
-	const AWS_S3 					= 's3';
-	const AWS_SES 					= 'ses';
-	const AWS_SIMPLEDB 				= 'simpledb';
-	const AWS_SNS 					= 'sns';
-	const AWS_SQS 					= 'sqs';
-	const AWS_STS 					= 'sts';
-	const AWS_SWF 					= 'swf';
+	const AWS_ELASTIC_TRANSCODER = 'elastictranscoder';
+	const AWS_GLACIER = 'glacier';
+	const AWS_IAM = 'iam';
+	const AWS_OPSWORKS = 'opsworks';
+	const AWS_RDS = 'rds';
+	const AWS_REDSHIFT = 'redshift';
+	const AWS_ROUTE53 = 'route53';
+	const AWS_S3 = 's3';
+	const AWS_SES = 'ses';
+	const AWS_SIMPLEDB = 'simpledb';
+	const AWS_SNS = 'sns';
+	const AWS_SQS = 'sqs';
+	const AWS_STS = 'sts';
+	const AWS_SWF = 'swf';
 
 
 	protected $_aws;
@@ -46,6 +46,7 @@ abstract class A2Base extends CComponent
 	/**
 	 * Returns the aws service builder
 	 * @return Guzzle\Service\Builder\ServiceBuilder
+	 * @throws CException
 	 */
 	public function getAws()
 	{
@@ -66,24 +67,23 @@ abstract class A2Base extends CComponent
 	 * @param string $method
 	 * @param array $args
 	 * @return mixed
+	 * @throws CException
 	 */
 	public function __call($method, $args)
 	{
+		$args = current($args);
 		try
 		{
-			$command_args = count($args)
-				? $args[0]
-				: $args;
-
 			$command = $this->getClient()
-				->getCommand(Inflector::getDefault()->camel($method), $command_args);
+				->getCommand(Inflector::getDefault()->camel($method), $args);
 
 			if ($command)
-				return $this->getClient()->execute($command, $command_args);
+				return $this->getClient()->execute($command, $args);
 
-		} catch(Exception $e) {
-
-			throw new CException(Yii::t('zii', $e->getMessage()));
+		} catch (Exception $e)
+		{
+			// do nothing
+			throw new CException(Yii::t('zii', $e->getMessage())); //custom added
 		}
 		return parent::__call($method, $args);
 	}
