@@ -70,22 +70,19 @@ abstract class A2Base extends CComponent
 	 * @return mixed
 	 */
 	public function __call($method, $args)
-	{
+	{// the "current" is nessesary here:
+		$args = current($args);
 		try
 		{
-			$command_args = count($args)
-				? $args[0]
-				: $args;
-
 			$command = $this->getClient()
-				->getCommand(Inflector::getDefault()->camel($method), $command_args);
+			->getCommand(Inflector::getDefault()->camel($method), $args);
 
 			if ($command)
-				return $this->getClient()->execute($command, $command_args);
+				return $this->getClient()->execute($command, $args);
 
 		} catch(Exception $e) {
-
-			throw new CException(Yii::t('zii', $e->getMessage()));
+			// do nothing
+			throw new CException(Yii::t('zii', $e->getMessage()));//custom added
 		}
 		return parent::__call($method, $args);
 	}
