@@ -48,6 +48,7 @@ abstract class A2Base extends CComponent
 	/**
 	 * Returns the aws service builder
 	 * @return Guzzle\Service\Builder\ServiceBuilder
+	 * @throws CException
 	 */
 	public function getAws()
 	{
@@ -68,6 +69,7 @@ abstract class A2Base extends CComponent
 	 * @param string $method
 	 * @param array $args
 	 * @return mixed
+	 * @throws CException
 	 */
 	public function __call($method, $args)
 	{// the "current" is nessesary here:
