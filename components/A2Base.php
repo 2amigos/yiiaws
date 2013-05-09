@@ -73,7 +73,11 @@ abstract class A2Base extends CComponent
 	 */
 	public function __call($method, $args)
 	{// the "current" is nessesary here:
-		$args = current($args);
+		if($args == false){
+			$args = array();
+		}else{
+			$args = current($args);
+		}
 		try
 		{
 			$command = $this->getClient()
