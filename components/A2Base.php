@@ -38,11 +38,17 @@ abstract class A2Base extends CComponent
     const AWS_STS                   = 'sts';
     const AWS_SWF                   = 'swf';
 
-
+    /**
+     * @var Aws holds the pointer to aws instance
+     */
     protected $_aws;
-
+    /**
+     * @var AS2Base client
+     */
     protected $_client;
-
+    /**
+     * @var array holds custom configuration
+     */
     protected $_config;
 
     /**
@@ -81,7 +87,7 @@ abstract class A2Base extends CComponent
      * @throws CException
      */
     public function __call($method, $args)
-    {
+    { // the "current" is nessesary here:
         $args = current($args);
         try {
             $command = $this->getClient()

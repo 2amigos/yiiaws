@@ -9,14 +9,14 @@
  */
 
 return array(
-	'includes' => array('_aws'),
-	'services' => array(
-		'default_settings' => array(
-			'params' => array(
-				'key'    => '{YOUR-AWS-KEY}',
-				'secret' => '{YOUR-AWS-SECRET}',
-				'region' => 'us-east-1'
-			)
-		)
-	)
+    'includes' => array('_aws'),
+    'services' => array(
+        'default_settings' => array(
+            'params' => array(
+                'key'    => '{YOUR-AWS-KEY}',
+                'secret' => '{YOUR-AWS-SECRET}',
+                'region' => 'us-east-1'
+            )
+        )
+    )
 );
