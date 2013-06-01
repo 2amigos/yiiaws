@@ -40,10 +40,18 @@ abstract class A2Base extends CComponent
 	const AWS_STS 					= 'sts';
 	const AWS_SWF 					= 'swf';
 
-
-	protected $_aws;
-
-	protected $_client;
+    /**
+     * @var Aws holds the pointer to aws instance
+     */
+    protected $_aws;
+    /**
+     * @var AS2Base client
+     */
+    protected $_client;
+    /**
+     * @var array holds custom configuration
+     */
+    protected $_config;
 
     /**
      * Added option to use dynamic configurations instead of a file
