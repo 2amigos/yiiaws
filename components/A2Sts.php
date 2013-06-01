@@ -12,21 +12,26 @@
 /**
  * Client to interact with AWS Security Token Service
  *
- * @method Model assumeRole(array $args = array()) {@command Sts AssumeRole}
- * @method Model getFederationToken(array $args = array()) {@command Sts GetFederationToken}
- * @method Model getSessionToken(array $args = array()) {@command Sts GetSessionToken}
+ * @method Model assumeRole(array $args = array()) {
+@command Sts AssumeRole
+}
+ * @method Model getFederationToken(array $args = array()) {
+@command Sts GetFederationToken
+}
+ * @method Model getSessionToken(array $args = array()) {
+@command Sts GetSessionToken
+}
  */
 class A2Sts extends A2S3
 {
-	/**
-	 * @return Aws\Sts\StsClient
-	 */
-	public function getClient()
-	{
-		if(null === $this->_client)
-		{
-			$this->_client = $this->getAws()->get(self::AWS_STS);
-		}
-		return $this->_client;
-	}
+    /**
+     * @return Aws\Sts\StsClient
+     */
+    public function getClient()
+    {
+        if (null === $this->_client) {
+            $this->_client = $this->getAws()->get(self::AWS_STS);
+        }
+        return $this->_client;
+    }
 }
