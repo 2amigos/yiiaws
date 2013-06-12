@@ -66,6 +66,20 @@ $response = $s3->listBuckets(); // we are going to list the buckets
 
 // just for the sake of the example
 print_r($response);
+
+$result = $s3->putObject(array(
+    'Bucket' => 'YOUR-BUCKET,
+    'Key'    => 'data.txt',
+    'Body'   => 'Hello!'
+));
+
+// Fancier options (such as waiters - http://docs.aws.amazon.com/aws-sdk-php-2/guide/latest/feature-waiters.html)
+// require calling the S3 getClient() method.  If you don't use the getClient() method, you will get an error
+// something like "Command was not found matching WaitUntilObjectExists"
+$s3->getClient()->waitUntilObjectExists(array(
+    'Bucket' => 'YOUR-BUCKET',
+    'Key'    => 'data.txt',
+));
 ~~~
 
 ###Requirements
